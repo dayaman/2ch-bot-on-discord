@@ -27,6 +27,7 @@ class MyHelpCommand(discord.ext.commands.HelpCommand):
         このコマンドは「2ch」「5ch」と言う名前のチャンネルで使えます。
         コマンド一覧
         /2ch : 投稿フォームが表示され、匿名で投稿ができます。
+        /name [名前] : デフォルトの名前を更新します。
         /help : このヘルプを表示します。
                                                     
         投稿フォームについて
