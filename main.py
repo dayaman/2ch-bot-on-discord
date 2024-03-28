@@ -22,8 +22,8 @@ class MyHelpCommand(discord.ext.commands.HelpCommand):
             command_attrs={"brief": "ヘルプを表示"}
         )
     
-    async def send_bot_help(self, mapping):
-        await self.get_destination().send("""
+    async def send_bot_help(mapping, /):
+        await super().get_destination().send("""
         このコマンドは「2ch」「5ch」と言う名前のチャンネルで使えます。
         コマンド一覧
         /2ch : 投稿フォームが表示され、匿名で投稿ができます。
