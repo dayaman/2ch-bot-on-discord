@@ -36,7 +36,7 @@ class MyHelpCommand(discord.ext.commands.HelpCommand):
         本文：投稿内容を入力します。                                     
         """)
 
-bot = discord.ext.commands.Bot(intents=intents, command_prefix="/", help_command=MyHelpCommand())
+bot = discord.ext.commands.Bot(command_prefix="/", help_command=MyHelpCommand(),intents=intents)
 tree = bot.tree
 
 @bot.event
