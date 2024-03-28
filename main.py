@@ -15,25 +15,11 @@ intents.guilds = True
 # database接続
 db = MyDatabase('database.db')
 
-class MyHelpCommand(discord.ext.commands.HelpCommand):
-    def __init__(self):
-        super().__init__(
-            show_hidden=False,
-            command_attrs={"brief": "ヘルプを表示"}
-        )
-    
-    async def send_bot_help(mapping, /):
-        await super().get_destination().send("""
-        このコマンドは「2ch」「5ch」と言う名前のチャンネルで使えます。
-        コマンド一覧
-        /2ch : 投稿フォームが表示され、匿名で投稿ができます。
-        /name [名前] : デフォルトの名前を更新します。
-        /help : このヘルプを表示します。
-                                                    
-        投稿フォームについて
-        名前：名前を入力します。名前は省略できます。名前の後に#をつけてパスワードを入力するとトリップが生成されます。(例: hoge#password -> hoge◆trip)
-        本文：投稿内容を入力します。                                     
-        """)
+# MyHelpCommandクラスを作成
+# 「おほ〜」と送信する
+class MyHelpCommand(discord.ext.commands.DefaultHelpCommand):
+    async def send_bot_help(self, mapping):
+        await self.get_destination().send("おほ〜")
 
 bot = discord.ext.commands.Bot(command_prefix="/", help_command=MyHelpCommand(),intents=intents)
 tree = bot.tree
