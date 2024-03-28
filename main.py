@@ -22,7 +22,7 @@ class MyHelpCommand(discord.ext.commands.HelpCommand):
             command_attrs={"brief": "ヘルプを表示"}
         )
     
-    async def send_bot_help(self, mapping=None):
+    async def send_bot_help(self, mapping=None, /):
         await self.get_destination().send("""
         このコマンドは「2ch」「5ch」と言う名前のチャンネルで使えます。
         コマンド一覧
