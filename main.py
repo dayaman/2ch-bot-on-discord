@@ -1,7 +1,6 @@
 import discord
 import discord.ext.commands
 from discord import Interaction, ui, TextStyle
-from typing import Optional, Mapping
 import yaml
 import datetime
 import hashlib
@@ -23,7 +22,7 @@ class MyHelpCommand(discord.ext.commands.HelpCommand):
             command_attrs={"brief": "ヘルプを表示"}
         )
     
-    async def send_bot_help(self, mapping: Mapping[Optional[discord.ext.commands.Cog], list[discord.ext.commands.Command]], /):
+    async def send_bot_help(self, mapping):
         await self.get_destination().send("""
         このコマンドは「2ch」「5ch」と言う名前のチャンネルで使えます。
         コマンド一覧
