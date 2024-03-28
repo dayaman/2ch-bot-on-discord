@@ -8,25 +8,19 @@ from model import MyDatabase
 
 intents = discord.Intents.default()
 intents.typing = False
-intents.guild_messages = True
+intents.guild_messages = False
 intents.presences = False
 intents.guilds = True
 
 # database接続
 db = MyDatabase('database.db')
 
-# MyHelpCommandクラスを作成
-# 「おほ〜」と送信する
-class MyHelpCommand(discord.ext.commands.DefaultHelpCommand):
-    async def send_bot_help(self, mapping):
-        await self.get_destination().send("おほ〜")
-
-bot = discord.ext.commands.Bot(command_prefix="/", help_command=MyHelpCommand(),intents=intents)
+bot = discord.ext.commands.Bot(command_prefix="/", help_command=None, intents=intents)
 tree = bot.tree
 
 @bot.event
 async def on_ready():
-    await tree.sync()
+    print("Bot is ready")
 
 @bot.event
 async def on_guild_available(guild):
@@ -130,6 +124,20 @@ async def post(ctx):
 async def update_name(ctx, name: str):
     db.update_name(ctx.guild.id, name)
     await ctx.interaction.response.send_message(f"名前を {name} に更新しました", ephemeral=True)
+
+@bot.hybrid_command(name='help', description="ヘルプを表示します")
+async def send_help(ctx):
+    await ctx.send("""
+        このコマンドは「2ch」「5ch」と言う名前のチャンネルで使えます。
+        コマンド一覧
+        /2ch : 投稿フォームが表示され、匿名で投稿ができます。
+        /name [名前] : 名無しの表記を更新します。
+        /help : このヘルプを表示します。
+                                                    
+        投稿フォームについて
+        名前：名前を入力します。名前は省略できます。名前の後に#をつけてパスワードを入力するとトリップが生成されます。(例: hoge#password -> hoge◆trip)
+        本文：投稿内容を入力します。                                     
+        """)
 
 # Read bot token from config.yml
 with open('config.yml', 'r') as config_file:
